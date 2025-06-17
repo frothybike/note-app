@@ -7,9 +7,9 @@ on:
 permissions:
   id-token: write
 
-env:
-  ROLE_TO_ASSUME: arn:aws:iam::958933161565:role/github-role
-  AWS_REGION: ap-northeast-1
+# env:
+#   ROLE_TO_ASSUME: arn:aws:iam::958933161565:role/github-role
+#   AWS_REGION: ap-northeast-1
 
 jobs:
   apply:
@@ -20,8 +20,10 @@ jobs:
 
       - uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: ${{ env.ROLE_TO_ASSUME }}
-          aws-region: ${{ env.AWS_REGION }}
+          # role-to-assume: ${{ env.ROLE_TO_ASSUME }}
+          # aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: arn:aws:iam::958933161565:role/github-role
+          aws-region: ap-northeast-1
 
       - uses: hashicorp/setup-terraform@v3
 

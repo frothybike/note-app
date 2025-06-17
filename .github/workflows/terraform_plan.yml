@@ -10,9 +10,9 @@ permissions:
   contents: read
   pull-requests: write
 
-env:
-  ROLE_TO_ASSUME: arn:aws:iam::958933161565:role/github-role
-  AWS_REGION: ap-northeast-1
+# env:
+#   ROLE_TO_ASSUME: arn:aws:iam::958933161565:role/github-role
+#   AWS_REGION: ap-northeast-1
 
 jobs:
   terraform:
@@ -31,8 +31,10 @@ jobs:
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: ${{ env.ROLE_TO_ASSUME }}
-          aws-region: ${{ env.AWS_REGION }}
+          # role-to-assume: ${{ env.ROLE_TO_ASSUME }}
+          # aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: arn:aws:iam::958933161565:role/github-role
+          aws-region: ap-northeast-1
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
