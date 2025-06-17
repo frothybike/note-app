@@ -14,10 +14,10 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "example_bucket" {
-  bucket = "example_bucket_20250618"
+  bucket = "example-bucket-20250618"
   acl    = "private"
 
   tags = {
-    Name        = "example_bucket_20250618"
+    Name        = "example-bucket-20250618"
   }
 }
