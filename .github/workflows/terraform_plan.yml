@@ -1,0 +1,55 @@
+name: "Workflow for Terraform Plan"
+on:
+  pull_request:
+    branches:
+      - "main"
+    types: [opened, synchronize]
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+env:
+  ROLE_TO_ASSUME: arn:aws:iam::958933161565:role/github-role
+  AWS_REGION: ap-northeast-1
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: production
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::958933161565:role/github-role
+          aws-region: ap-northeast-1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: infra/terraform
+
+      - name: Terraform Format
+        run: terraform fmt -check
+        working-directory: infra/terraform
+
+      - name: Terraform Plan
+        run: terraform plan -input=false -no-color > plan.txt
+        working-directory: infra/terraform
+
+      - name: Comment Terraform Plan on PR
+        uses: mshick/add-pr-comment@v2
+        with:
+          message-path: infra/terraform/plan.txt
