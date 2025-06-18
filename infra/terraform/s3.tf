@@ -1,6 +1,5 @@
 resource "aws_s3_bucket" "static_www" {
   bucket = "note-app-static-www"
-  acl    = "private"
 
   tags = {
     Name = "note-app-static-www"
