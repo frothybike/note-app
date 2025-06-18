@@ -1,13 +1,13 @@
-resource "aws_s3_bucket" "static_www" {
-  bucket = "note-app-static-www"
+resource "aws_s3_bucket" "static_pages" {
+  bucket = "note-app-static_pages"
 
   tags = {
-    Name = "note-app-static-www"
+    Name = "note-app-static_pages"
   }
 }
 
 resource "aws_s3_bucket_policy" "static_website" {
-  bucket = aws_s3_bucket.static_www.id
+  bucket = aws_s3_bucket.static_pages.id
   policy = data.aws_iam_policy_document.policy_document.json
 }
 
@@ -23,8 +23,8 @@ data "aws_iam_policy_document" "policy_document" {
     ]
 
     resources = [
-      aws_s3_bucket.static_www.arn,
-      "${aws_s3_bucket.static_www.arn}/*",
+      aws_s3_bucket.static_pages.arn,
+      "${aws_s3_bucket.static_pages.arn}/*",
     ]
     condition {
       test     = "StringEquals"

@@ -7,6 +7,12 @@ terraform {
   }
 
   required_version = ">= 1.0"
+
+  backend "s3" {
+    bucket         = "note-app-remote-backend"
+    key            = "note-app-remote-backend/terraform.tfstate"
+    region         = "ap-northeast-1"
+  }
 }
 
 provider "aws" {

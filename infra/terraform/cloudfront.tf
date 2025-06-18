@@ -3,8 +3,8 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
   default_root_object = "index.html"
 
   origin {
-    origin_id                = aws_s3_bucket.static_www.id
-    domain_name              = aws_s3_bucket.static_www.bucket_regional_domain_name
+    origin_id                = aws_s3_bucket.static_pages.id
+    domain_name              = aws_s3_bucket.static_pages.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.note_app_oac.id
   }
 
@@ -13,7 +13,7 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
   }
 
   default_cache_behavior {
-    target_origin_id       = aws_s3_bucket.static_www.id
+    target_origin_id       = aws_s3_bucket.static_pages.id
     viewer_protocol_policy = "redirect-to-https"
     cached_methods         = ["GET", "HEAD"]
     allowed_methods        = ["GET", "HEAD"]
@@ -33,7 +33,7 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
 }
 
 resource "aws_cloudfront_origin_access_control" "note_app_oac" {
-  name                              = aws_s3_bucket.static_www.bucket_domain_name
+  name                              = aws_s3_bucket.static_pages.bucket_domain_name
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
