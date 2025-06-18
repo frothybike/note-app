@@ -1,8 +1,8 @@
 resource "aws_s3_bucket" "static_pages" {
-  bucket = "note-app-static_pages"
+  bucket = "note-app-static-pages"
 
   tags = {
-    Name = "note-app-static_pages"
+    Name = "note-app-static-pages"
   }
 }
 
