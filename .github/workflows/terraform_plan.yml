@@ -4,7 +4,7 @@ on:
     branches:
       - "main"
     types: [opened, synchronize]
-    paths: infra/terraform
+    paths: infra/terraform/**
 
 permissions:
   id-token: write

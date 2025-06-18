@@ -12,12 +12,3 @@ terraform {
 provider "aws" {
   region = "ap-northeast-1"
 }
-
-resource "aws_s3_bucket" "example_bucket" {
-  bucket = "example-bucket-20250618"
-  acl    = "private"
-
-  tags = {
-    Name        = "example-bucket-20250618"
-  }
-}
