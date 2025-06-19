@@ -30,6 +30,13 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
       restriction_type = "none"
     }
   }
+
+  custom_error_response {
+    error_caching_min_ttl = "10"
+    error_code            = "403"
+    response_code         = "200"
+    response_page_path    = "/"
+  }
 }
 
 resource "aws_cloudfront_origin_access_control" "note_app_oac" {
