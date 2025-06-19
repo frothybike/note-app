@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-    paths: infra/terraform/**
+    paths: frontend/note-app/**
   workflow_dispatch:
 
 jobs:
