@@ -3,30 +3,19 @@ import React from 'react';
 
 const Header: React.FC = () => {
   return (
-    <header style={headerStyle}>
-      <nav style={navStyle}>
-        <Link href="/" style={linkStyle}>Home</Link>
-        <Link href="/about" style={linkStyle}>About</Link>
-        <Link href="/contact" style={linkStyle}>Contact</Link>
-      </nav>
+    <header className="text-white body-font bg-blue-600">
+      <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <Link href="/" className="flex title-font font-medium items-center mb-4 md:mb-0 md:ml-3 text-xl">
+          NoteApp
+        </Link>
+        <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
+          <Link href="/" className="mx-4 md:mr-8 hover:text-gray-900">Home</Link>
+          <Link href="/about" className="mx-4 md:mr-8 hover:text-gray-900">About</Link>
+          <a href='/login' className="mx-4 md:mr-8 hover:text-gray-900">Login</a>
+        </nav>
+      </div>
     </header>
   );
-};
-
-const headerStyle: React.CSSProperties = {
-  backgroundColor: '#333',
-  padding: '1rem',
-  color: 'white',
-};
-
-const navStyle: React.CSSProperties = {
-  display: 'flex',
-  gap: '1rem',
-};
-
-const linkStyle: React.CSSProperties = {
-  color: 'white',
-  textDecoration: 'none',
 };
 
 export default Header;
