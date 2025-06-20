@@ -1,3 +1,11 @@
+resource "aws_cloudfront_function" "index_document_function" {
+  name    = "index-document-function"
+  runtime = "cloudfront-js-2.0"
+  comment = "index document function"
+  publish = true
+  code    = file("${path.module}/index-document-function.js")
+}
+
 resource "aws_cloudfront_distribution" "note_app_cfront" {
   enabled = true
   default_root_object = "index.html"
@@ -22,6 +30,10 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
       cookies {
         forward = "none"
       }
+    }
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.index_document_function.arn
     }
   }
 
