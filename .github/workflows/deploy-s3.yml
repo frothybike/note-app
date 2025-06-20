@@ -38,7 +38,7 @@ jobs:
 
       - name: Deploy
         run: |
-                    aws s3 sync --exact-timestamps --delete dist s3://note-app-static-pages
+                    aws s3 sync --exact-timestamps --delete out s3://note-app-static-pages
 
       - name: Clear Cache
         run: |
