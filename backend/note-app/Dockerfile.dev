@@ -1,0 +1,16 @@
+FROM ruby:3.2.8
+
+RUN mkdir /note-app
+
+WORKDIR /note-app
+
+COPY Gemfile /note-app/Gemfile
+
+COPY Gemfile.lock /note-app/Gemfile.lock
+
+RUN gem update --system ${RUBYGEMS_VERSION} && \
+    bundle install
+
+COPY . /note-app
+
+CMD ["rails", "server", "-b", "0.0.0.0"]
