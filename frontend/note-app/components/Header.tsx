@@ -9,9 +9,9 @@ const Header: React.FC = () => {
           NoteApp
         </Link>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          <Link href="/" className="mx-4 md:mr-8 hover:text-gray-900">Home</Link>
-          <Link href="/about" className="mx-4 md:mr-8 hover:text-gray-900">About</Link>
-          <a href='/login' className="mx-4 md:mr-8 hover:text-gray-900">Login</a>
+          <Link href="/function" className="mx-4 md:mr-4 hover:text-gray-900">機能</Link>
+          <Link href="/contact" className="mx-4 md:mr-4 hover:text-gray-900">お問い合わせ</Link>
+          <a href='/login' className="mx-4 md:mr-4 hover:text-gray-900">ログイン</a>
         </nav>
       </div>
     </header>
