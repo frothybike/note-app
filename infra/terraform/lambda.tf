@@ -5,7 +5,7 @@ variable "lambda_func1" {
 data "archive_file" "func1" {
   type        = "zip"
   output_path = "../../backend/api/${var.lambda_func1}/${var.lambda_func1}"
-  source_file  = "../../backend/api/${var.lambda_func1}/${var.lambda_func1}.js"
+  source_dir  = "../../backend/api/${var.lambda_func1}"
 }
 
 data "aws_iam_role" "func1_role" {
