@@ -1,6 +1,7 @@
 data "aws_acm_certificate" "namabanana" {
   domain   = "*.namabanana.com"
   statuses = ["ISSUED"]
+  provider = aws.virginia
 }
 
 resource "aws_cloudfront_function" "index_document_function" {
