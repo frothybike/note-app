@@ -28,8 +28,6 @@ export default function ContactFormPage() {
     resolver: yupResolver(schema),
   });
 
-  const [submitted, setSubmitted] = useState(false);
-
   const onSubmit = async (data: FormData) => {
     try {
       const response = await fetch("https://jqi9ljoedk.execute-api.ap-northeast-1.amazonaws.com/v1/send", {
@@ -43,7 +41,6 @@ export default function ContactFormPage() {
       if (response.ok) {
         alert("送信に成功しました");
         reset();
-        setSubmitted(true);
       } else {
         alert("送信に失敗しました");
       }
