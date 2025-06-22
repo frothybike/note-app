@@ -24,6 +24,16 @@ resource "aws_api_gateway_integration" "send_mail_api_get" {
   integration_http_method = "POST"
   type                    = "AWS"
   uri                     = aws_lambda_function.func1.invoke_arn
+
+  request_templates = {
+    "application/json" = <<EOF
+{
+  "name": "$input.path('$.name')",
+  "email": "$input.path('$.email')",
+  "message": "$input.path('$.message')"
+}
+EOF
+  }
 }
 
 resource "aws_api_gateway_deployment" "send_mail_api" {
