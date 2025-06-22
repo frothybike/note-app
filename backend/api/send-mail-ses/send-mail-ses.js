@@ -3,9 +3,9 @@ const SDK = require('aws-sdk');
 
 exports.handler = (event, context, callback) => {
     const ses = new SDK.SES({ region: 'ap-northeast-1' });
-    const adminaddress = process.env.EMAIL_TO
+    const adminaddress = "frothybike8@gmail.com"
     const email = {
-        Source: process.env.EMAIL_FROM,
+        Source: "frothybike8@gmail.com"
         Destination: { 
             ToAddresses: [ adminaddress ]            
         },
