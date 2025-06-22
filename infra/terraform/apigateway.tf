@@ -28,9 +28,11 @@ resource "aws_api_gateway_integration" "send_mail_api_get" {
   request_templates = {
     "application/json" = <<EOF
 {
-  "name": "$input.path('$.name')",
-  "email": "$input.path('$.email')",
-  "message": "$input.path('$.message')"
+    "form": {
+        "subject":  "$util.escapeJavaScript($input.path('$.subject'))",
+        "email":  "$util.escapeJavaScript($input.path('$.email'))",
+        "body":  "$util.escapeJavaScript($input.path('$.body'))"
+    }
 }
 EOF
   }
