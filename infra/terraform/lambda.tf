@@ -26,7 +26,7 @@ resource "aws_lambda_function" "func1" {
   runtime          = "nodejs22.x"
   s3_bucket        = aws_s3_bucket.send_mail_ses_src.id
   s3_key           = aws_s3_object.func1.key
-  role             = data.aws_iam_role.func1_role
+  role             = data.aws_iam_role.func1_role.arn
 }
 
 resource "aws_cloudwatch_log_group" "func1" {
