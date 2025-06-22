@@ -1,0 +1,1 @@
+lambda_func1 = "send-mail-ses"
