@@ -1,3 +1,9 @@
+data "aws_acm_certificate" "namabanana" {
+  domain   = "*.namabanana.com"
+  statuses = ["ISSUED"]
+  provider = aws.virginia
+}
+
 resource "aws_cloudfront_function" "index_document_function" {
   name    = "index-document-function"
   runtime = "cloudfront-js-2.0"
@@ -16,8 +22,15 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
     origin_access_control_id = aws_cloudfront_origin_access_control.note_app_oac.id
   }
 
+  aliases = [
+    "www.namabanana.com",
+  ]
+
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn            = data.aws_acm_certificate.namabanana.arn
+    cloudfront_default_certificate = false
+    minimum_protocol_version       = "TLSv1.2_2021"
+    ssl_support_method             = "sni-only"
   }
 
   default_cache_behavior {
