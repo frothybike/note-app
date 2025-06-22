@@ -38,6 +38,38 @@ EOF
   }
 }
 
+resource "aws_api_gateway_integration_response" "post_response" {
+  rest_api_id   = aws_api_gateway_rest_api.send_mail_api.id
+  resource_id   = aws_api_gateway_resource.send_mail_api_resource.id
+  http_method   = aws_api_gateway_method.send_mail_api_get.http_method
+  status_code   = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin"  = "'https://www.namabanana.com'"
+    "method.response.header.Access-Control-Allow-Methods" = "'POST,OPTIONS'"
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type'"
+  }
+
+  depends_on = [aws_api_gateway_integration.send_mail_api_get]
+}
+
+resource "aws_api_gateway_method_response" "post_response" {
+  rest_api_id = aws_api_gateway_rest_api.send_mail_api.id
+  resource_id = aws_api_gateway_resource.send_mail_api_resource.id
+  http_method = aws_api_gateway_method.send_mail_api_get.http_method
+  status_code = "200"
+
+  response_models = {
+    "application/json" = "Empty"
+  }
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin"  = true
+    "method.response.header.Access-Control-Allow-Methods" = true
+    "method.response.header.Access-Control-Allow-Headers" = true
+  }
+}
+
 resource "aws_api_gateway_deployment" "send_mail_api" {
   depends_on = [
     "aws_api_gateway_integration.send_mail_api_get",
