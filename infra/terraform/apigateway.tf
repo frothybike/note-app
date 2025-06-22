@@ -22,7 +22,7 @@ resource "aws_api_gateway_integration" "send_mail_api_get" {
   http_method   = aws_api_gateway_method.send_mail_api_get.http_method
 
   integration_http_method = "POST"
-  type                    = "AWS_PROXY"
+  type                    = "AWS"
   uri                     = aws_lambda_function.func1.invoke_arn
 }
 
