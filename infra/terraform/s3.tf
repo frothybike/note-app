@@ -33,3 +33,11 @@ data "aws_iam_policy_document" "policy_document" {
     }
   }
 }
+
+resource "aws_s3_bucket" "send_mail_ses_src" {
+  bucket = "send_mail_ses_src"
+
+  tags = {
+    Name = "send_mail_ses_src"
+  }
+}
