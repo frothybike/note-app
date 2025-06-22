@@ -24,7 +24,7 @@ resource "aws_lambda_function" "func1" {
   handler          = "src.app.lambda_handler"
   source_code_hash = base64sha256(data.archive_file.func1.output_path)
   runtime          = "nodejs22.x"
-  s3_bucket        = aws_s3_bucket.api.id
+  s3_bucket        = aws_s3_bucket.send_mail_ses_src.id
   s3_key           = aws_s3_object.func1.key
   role             = data.aws_iam_role.func1_role
 }
