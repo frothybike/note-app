@@ -4,9 +4,9 @@ variable "lambda_func1" {
 
 data "archive_file" "func1" {
   type        = "zip"
-  output_path = "../api/${var.lambda_func1}/src.zip"
-  source_dir  = "../api/${var.lambda_func1}"
-  excludes    = ["../api/${var.lambda_func1}/tests"]
+  output_path = "../backend/api/${var.lambda_func1}/src.zip"
+  source_dir  = "../backend/api/${var.lambda_func1}"
+  excludes    = ["../backend/api/${var.lambda_func1}/tests"]
 }
 
 data "aws_iam_role" "func1_role" {
