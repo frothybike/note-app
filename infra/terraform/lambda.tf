@@ -4,9 +4,8 @@ variable "lambda_func1" {
 
 data "archive_file" "func1" {
   type        = "zip"
-  output_path = "../../backend/api/${var.lambda_func1}/src.zip"
-  source_dir  = "../../backend/api/${var.lambda_func1}"
-  excludes    = ["../../backend/api/${var.lambda_func1}/tests"]
+  output_path = "../../backend/api/${var.lambda_func1}/${var.lambda_func1}"
+  source_file  = "../../backend/api/${var.lambda_func1}/${var.lambda_func1}.js"
 }
 
 data "aws_iam_role" "func1_role" {
@@ -21,7 +20,7 @@ resource "aws_s3_object" "func1" {
 
 resource "aws_lambda_function" "func1" {
   function_name    = var.lambda_func1
-  handler          = "src.app.lambda_handler"
+  handler          = "send-mail-ses.handler"
   source_code_hash = base64sha256(data.archive_file.func1.output_path)
   runtime          = "nodejs22.x"
   s3_bucket        = aws_s3_bucket.send_mail_ses_src.id
