@@ -4,7 +4,7 @@ export const handler = async (event) => {
   const sesClient = new SESClient({ region: 'ap-northeast-1' });
 
   const params = {
-    Source: 'frothybike8@gmail.com',
+    Source: 'no-reply@namabanana.com',
     Destination: {
       ToAddresses: ['frothybike8@gmail.com'],
     },
