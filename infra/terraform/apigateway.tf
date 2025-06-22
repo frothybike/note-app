@@ -26,7 +26,7 @@ resource "aws_api_gateway_integration" "send_mail_api_get" {
   uri                     = aws_lambda_function.func1.invoke_arn
 }
 
-resource "aws_api_gateway_deployment" "example" {
+resource "aws_api_gateway_deployment" "send_mail_api" {
   depends_on = [
     "aws_api_gateway_integration.send_mail_api_get",
   ]
