@@ -5,7 +5,7 @@ exports.handler = (event, context, callback) => {
     const ses = new SDK.SES({ region: 'ap-northeast-1' });
     const adminaddress = "frothybike8@gmail.com"
     const email = {
-        Source: "frothybike8@gmail.com"
+        Source: "frothybike8@gmail.com",
         Destination: { 
             ToAddresses: [ adminaddress ]            
         },
