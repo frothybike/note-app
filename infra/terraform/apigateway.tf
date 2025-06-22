@@ -50,7 +50,10 @@ resource "aws_api_gateway_integration_response" "post_response" {
     "method.response.header.Access-Control-Allow-Headers" = "'Content-Type'"
   }
 
-  depends_on = [aws_api_gateway_integration.send_mail_api_get]
+  depends_on = [
+    aws_api_gateway_integration.send_mail_api_get,
+    ws_api_gateway_method_response.post_response
+  ]
 }
 
 resource "aws_api_gateway_method_response" "post_response" {
