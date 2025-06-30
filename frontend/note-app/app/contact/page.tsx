@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Head from "next/head";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   subject: string;
@@ -18,6 +19,8 @@ const schema = yup.object().shape({
 });
 
 export default function ContactFormPage() {
+  const router = useRouter();
+  
   const {
     register,
     handleSubmit,
@@ -38,8 +41,8 @@ export default function ContactFormPage() {
       });
 
       if (response.ok) {
-        alert("送信に成功しました");
         reset();
+        router.push("/contact/thanks");
       } else {
         alert("送信に失敗しました");
       }
