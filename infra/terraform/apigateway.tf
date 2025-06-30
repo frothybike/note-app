@@ -47,8 +47,6 @@ resource "aws_api_gateway_deployment" "send_mail_api" {
   stage_name  = "v1"
 }
 
-
-
 resource "aws_api_gateway_method_response" "post_response" {
   rest_api_id = aws_api_gateway_rest_api.send_mail_api.id
   resource_id = aws_api_gateway_resource.send_mail_api_resource.id
@@ -82,6 +80,13 @@ resource "aws_api_gateway_integration_response" "post_response" {
     aws_api_gateway_integration.send_mail_api_post,
     aws_api_gateway_method_response.post_response
   ]
+}
+
+resource "aws_api_gateway_method" "options_method" {
+  rest_api_id   = aws_api_gateway_rest_api.send_mail_api.id
+  resource_id   = aws_api_gateway_resource.send_mail_api_resource.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
 }
 
 resource "aws_api_gateway_integration" "options_integration" {
