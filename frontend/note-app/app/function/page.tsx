@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "機能",
+};
+
 export default function Function() {
   return (
     <main className="text-gray-600 body-font">
