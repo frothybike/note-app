@@ -38,7 +38,7 @@ resource "aws_lambda_function" "func1" {
   environment {
 		variables = {
 			FROM_ADDRESS = var.from_address
-      TO_ADDRESSES   = var.to_address
+      TO_ADDRESS   = var.to_address
 		}
 	}
 }
