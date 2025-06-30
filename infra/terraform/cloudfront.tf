@@ -64,7 +64,7 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
     cached_methods         = ["GET", "HEAD"]
     allowed_methods        = ["GET", "HEAD"]
     
-    cache_policy_id = data.aws_cloudfront_cache_policy.managed_caching_optimized
+    cache_policy_id = data.aws_cloudfront_cache_policy.managed_caching_optimized.id
 
     function_association {
       event_type   = "viewer-request"
@@ -80,7 +80,7 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
     allowed_methods = ["HEAD", "DELETE", "POST", "GET", "OPTIONS", "PUT", "PATCH"]
     cached_methods  = ["HEAD", "GET", "OPTIONS"]
 
-    cache_policy_id          = data.aws_cloudfront_cache_policy.managed_caching_disabled
+    cache_policy_id          = data.aws_cloudfront_cache_policy.managed_caching_disabled.id
     origin_request_policy_id = data.aws_cloudfront_origin_request_policy.managed_all_viewer_except_host_header.id
 
     # forwarded_values {
