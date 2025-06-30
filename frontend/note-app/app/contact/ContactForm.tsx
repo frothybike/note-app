@@ -31,7 +31,7 @@ export default function ContactForm() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const response = await fetch("https://www.namabanana.com/api/sendmail", {
+      const response = await fetch("https://www.namabanana.com/api/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
