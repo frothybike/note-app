@@ -4,6 +4,10 @@ data "aws_acm_certificate" "namabanana" {
   provider = aws.virginia
 }
 
+data "aws_cloudfront_origin_request_policy" "all_viewer_except_host_header" {
+  name = "AllViewerExceptHostHeader"
+}
+
 resource "aws_cloudfront_function" "index_document_function" {
   name    = "index-document-function"
   runtime = "cloudfront-js-2.0"
@@ -70,6 +74,8 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
 
     allowed_methods = ["HEAD", "DELETE", "POST", "GET", "OPTIONS", "PUT", "PATCH"]
     cached_methods  = ["HEAD", "GET", "OPTIONS"]
+
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.all_viewer_except_host_header.id
 
     forwarded_values {
       query_string = true
