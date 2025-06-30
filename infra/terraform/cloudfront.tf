@@ -22,6 +22,19 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
     origin_access_control_id = aws_cloudfront_origin_access_control.note_app_oac.id
   }
 
+  origin {
+    domain_name = "22fm1a0bc1.execute-api.ap-northeast-1.amazonaws.com"
+    origin_id   = "api-gateway-origin"
+    origin_path = "/v1/send"
+
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "https-only"
+      origin_ssl_protocols   = ["TLSv1.2"]
+    }
+  }
+
   aliases = [
     "www.namabanana.com",
   ]
@@ -47,6 +60,24 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
     function_association {
       event_type   = "viewer-request"
       function_arn = aws_cloudfront_function.index_document_function.arn
+    }
+  }
+
+  ordered_cache_behavior {
+    path_pattern           = "/api/sendmail"
+    target_origin_id       = aws_api_gateway_rest_api.send_mail_api.id
+    viewer_protocol_policy = "redirect-to-https"
+
+    allowed_methods = ["POST", "OPTIONS"]
+    cached_methods  = ["GET", "HEAD", "OPTIONS"]
+
+    forwarded_values {
+      query_string = true
+      headers      = ["Authorization"]
+
+      cookies {
+        forward = "all"
+      }
     }
   }
 
