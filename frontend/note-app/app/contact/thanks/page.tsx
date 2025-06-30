@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "お問い合わせ完了",
+};
+
 export default function ThanksPage() {
   return (
     <div className="max-w-xl mx-auto px-4 py-20 text-center">
