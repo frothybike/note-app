@@ -69,7 +69,7 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
     viewer_protocol_policy = "redirect-to-https"
 
     allowed_methods = ["POST", "OPTIONS"]
-    cached_methods  = ["GET", "HEAD", "OPTIONS"]
+    cached_methods  = ["OPTIONS"]
 
     forwarded_values {
       query_string = true
