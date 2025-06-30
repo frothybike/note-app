@@ -25,7 +25,7 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
   origin {
     origin_id   = aws_api_gateway_rest_api.send_mail_api.id
     domain_name = "22fm1a0bc1.execute-api.ap-northeast-1.amazonaws.com"
-    origin_path = "/v1/send"
+    origin_path = "/v1"
 
     custom_origin_config {
       http_port              = 80
@@ -64,7 +64,7 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
   }
 
   ordered_cache_behavior {
-    path_pattern           = "/api/sendmail"
+    path_pattern           = "/api/send"
     target_origin_id       = aws_api_gateway_rest_api.send_mail_api.id
     viewer_protocol_policy = "redirect-to-https"
 
