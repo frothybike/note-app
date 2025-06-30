@@ -48,11 +48,11 @@ resource "aws_cloudwatch_log_group" "func1" {
   retention_in_days = 3
 }
 
-# resource "aws_lambda_permission" "apigw" {
-#   statement_id  = "AllowAPIGatewayInvoke"
-#   action        = "lambda:InvokeFunction"
-#   function_name = aws_lambda_function.func1.function_name
-#   principal     = "apigateway.amazonaws.com"
+resource "aws_lambda_permission" "apigw" {
+  statement_id  = "AllowAPIGatewayInvoke"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.func1.function_name
+  principal     = "apigateway.amazonaws.com"
 
-#   source_arn = "${aws_api_gateway_rest_api.send_mail_api.execution_arn}/*"
-# }
+  source_arn = "${aws_api_gateway_rest_api.send_mail_api.execution_arn}/*"
+}
