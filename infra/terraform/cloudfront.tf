@@ -4,6 +4,10 @@ data "aws_acm_certificate" "namabanana" {
   provider = aws.virginia
 }
 
+data "aws_cloudfront_origin_request_policy" "managed_all_viewer_except_host_header" {
+  name = "Managed-AllViewerExceptHostHeader"
+}
+
 resource "aws_cloudfront_function" "index_document_function" {
   name    = "index-document-function"
   runtime = "cloudfront-js-2.0"
@@ -64,12 +68,14 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
   }
 
   ordered_cache_behavior {
-    path_pattern           = "/api/send"
+    path_pattern           = "/send"
     target_origin_id       = aws_api_gateway_rest_api.send_mail_api.id
     viewer_protocol_policy = "redirect-to-https"
 
     allowed_methods = ["HEAD", "DELETE", "POST", "GET", "OPTIONS", "PUT", "PATCH"]
     cached_methods  = ["HEAD", "GET", "OPTIONS"]
+
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.managed_all_viewer_except_host_header.id
 
     forwarded_values {
       query_string = true
