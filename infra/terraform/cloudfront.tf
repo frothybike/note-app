@@ -82,15 +82,6 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
 
     cache_policy_id          = data.aws_cloudfront_cache_policy.managed_caching_disabled.id
     origin_request_policy_id = data.aws_cloudfront_origin_request_policy.managed_all_viewer_except_host_header.id
-
-    # forwarded_values {
-    #   query_string = true
-    #   headers      = ["Authorization"]
-
-    #   cookies {
-    #     forward = "all"
-    #   }
-    # }
   }
 
   restrictions {
