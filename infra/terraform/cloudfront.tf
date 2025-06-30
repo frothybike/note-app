@@ -4,8 +4,8 @@ data "aws_acm_certificate" "namabanana" {
   provider = aws.virginia
 }
 
-data "aws_cloudfront_origin_request_policy" "all_viewer_except_host_header" {
-  name = "AllViewerExceptHostHeader"
+data "aws_cloudfront_origin_request_policy" "managed_all_viewer_except_host_header" {
+  name = "Managed-AllViewerExceptHostHeader"
 }
 
 resource "aws_cloudfront_function" "index_document_function" {
