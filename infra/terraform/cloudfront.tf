@@ -68,7 +68,7 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
     target_origin_id       = aws_api_gateway_rest_api.send_mail_api.id
     viewer_protocol_policy = "redirect-to-https"
 
-    allowed_methods = ["POST", "OPTIONS"]
+    allowed_methods = ["HEAD", "DELETE", "POST", "GET", "OPTIONS", "PUT", "PATCH"]
     cached_methods  = ["OPTIONS"]
 
     forwarded_values {
