@@ -54,23 +54,55 @@ export default function ContactFormPage() {
       <Head>
         <title>お問い合わせフォーム</title>
       </Head>
-      <div className="container" style={{ maxWidth: "960px", margin: "60px auto" }}>
-        <h2 className="title is-4">お問い合わせフォーム</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="field">
-            <input className="input" placeholder="お問い合わせの表題" {...register("subject")} />
-            <p className="help is-danger">{errors.subject?.message}</p>
+      <div className="max-w-2xl mx-auto px-4 py-12">
+        <h2 className="text-2xl font-semibold mb-6 text-center">お問い合わせフォーム</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <div>
+            <input
+              type="text"
+              placeholder="お問い合わせの表題"
+              {...register("subject")}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {errors.subject && (
+              <p className="text-sm text-red-600 mt-1">{errors.subject.message}</p>
+            )}
           </div>
-          <div className="field">
-            <input className="input" placeholder="メールアドレス" {...register("email")} />
-            <p className="help is-danger">{errors.email?.message}</p>
+
+          <div>
+            <input
+              type="email"
+              placeholder="メールアドレス"
+              {...register("email")}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {errors.email && (
+              <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>
+            )}
           </div>
-          <div className="field">
-            <textarea className="textarea" placeholder="お問い合わせ本文" {...register("body")} />
-            <p className="help is-danger">{errors.body?.message}</p>
+
+          <div>
+            <textarea
+              placeholder="お問い合わせ本文"
+              {...register("body")}
+              rows={6}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {errors.body && (
+              <p className="text-sm text-red-600 mt-1">{errors.body.message}</p>
+            )}
           </div>
-          <div className="field">
-            <button className="button is-link" type="submit" disabled={isSubmitting}>
+
+          <div>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={`w-full py-2 px-4 rounded-md text-white font-semibold ${
+                isSubmitting
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700"
+              }`}
+            >
               {isSubmitting ? "送信中です..." : "送信する"}
             </button>
           </div>
