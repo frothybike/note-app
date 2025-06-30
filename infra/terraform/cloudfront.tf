@@ -4,6 +4,14 @@ data "aws_acm_certificate" "namabanana" {
   provider = aws.virginia
 }
 
+data "aws_cloudfront_cache_policy" "managed_caching_optimized" {
+  name = "Managed-CachingOptimized"
+}
+
+data "aws_cloudfront_cache_policy" "managed_caching_disabled" {
+  name = "Managed-CachingDisabled"
+}
+
 data "aws_cloudfront_origin_request_policy" "managed_all_viewer_except_host_header" {
   name = "Managed-AllViewerExceptHostHeader"
 }
@@ -55,12 +63,9 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
     viewer_protocol_policy = "redirect-to-https"
     cached_methods         = ["GET", "HEAD"]
     allowed_methods        = ["GET", "HEAD"]
-    forwarded_values {
-      query_string = false
-      cookies {
-        forward = "none"
-      }
-    }
+    
+    cache_policy_id = data.aws_cloudfront_cache_policy.managed_caching_optimized.id
+
     function_association {
       event_type   = "viewer-request"
       function_arn = aws_cloudfront_function.index_document_function.arn
@@ -75,16 +80,17 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
     allowed_methods = ["HEAD", "DELETE", "POST", "GET", "OPTIONS", "PUT", "PATCH"]
     cached_methods  = ["HEAD", "GET", "OPTIONS"]
 
+    cache_policy_id          = data.aws_cloudfront_cache_policy.managed_caching_disabled.id
     origin_request_policy_id = data.aws_cloudfront_origin_request_policy.managed_all_viewer_except_host_header.id
 
-    forwarded_values {
-      query_string = true
-      headers      = ["Authorization"]
+    # forwarded_values {
+    #   query_string = true
+    #   headers      = ["Authorization"]
 
-      cookies {
-        forward = "all"
-      }
-    }
+    #   cookies {
+    #     forward = "all"
+    #   }
+    # }
   }
 
   restrictions {
