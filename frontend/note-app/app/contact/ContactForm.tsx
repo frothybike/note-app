@@ -31,7 +31,7 @@ export default function ContactForm() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const response = await fetch("https://jqi9ljoedk.execute-api.ap-northeast-1.amazonaws.com/v1/send", {
+      const response = await fetch("https://22fm1a0bc1.execute-api.ap-northeast-1.amazonaws.com/v1/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
