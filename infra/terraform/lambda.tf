@@ -2,6 +2,14 @@ variable "lambda_func1" {
   default = "func1"
 }
 
+variable "to_address" {
+  type = string
+}
+
+variable "from_address" {
+  type = string
+}
+
 data "archive_file" "func1" {
   type        = "zip"
   output_path = "../../backend/api/${var.lambda_func1}/${var.lambda_func1}.zip"
@@ -26,6 +34,13 @@ resource "aws_lambda_function" "func1" {
   s3_bucket        = aws_s3_bucket.send_mail_ses_src.id
   s3_key           = aws_s3_object.func1.key
   role             = data.aws_iam_role.func1_role.arn
+
+  environment {
+		variables = {
+			FROM_ADDRESS = var.from_address
+      TO_ADDRESSES   = var.to_address
+		}
+	}
 }
 
 resource "aws_cloudwatch_log_group" "func1" {
