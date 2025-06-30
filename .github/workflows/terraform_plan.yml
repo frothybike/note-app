@@ -16,6 +16,9 @@ jobs:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
+    env:
+      TF_VAR_from_address: ${{ secrets.FROM_ADDRESS }}
+      TF_VAR_to_address: ${{ secrets.TO_ADDRESS }}
 
     defaults:
       run:

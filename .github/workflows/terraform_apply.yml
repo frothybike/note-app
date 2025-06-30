@@ -13,6 +13,9 @@ permissions:
 jobs:
   apply:
     runs-on: ubuntu-latest
+    env:
+      TF_VAR_from_address: ${{ secrets.FROM_ADDRESS }}
+      TF_VAR_to_address: ${{ secrets.TO_ADDRESS }}
 
     steps:
       - uses: actions/checkout@v4
