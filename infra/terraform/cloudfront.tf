@@ -68,7 +68,7 @@ resource "aws_cloudfront_distribution" "note_app_cfront" {
   }
 
   ordered_cache_behavior {
-    path_pattern           = "/api/send"
+    path_pattern           = "/send"
     target_origin_id       = aws_api_gateway_rest_api.send_mail_api.id
     viewer_protocol_policy = "redirect-to-https"
 
